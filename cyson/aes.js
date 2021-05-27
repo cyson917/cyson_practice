@@ -11,6 +11,7 @@ var iv = key.slice(0,16);
 
 var test = "테스트";
 
+
 const cipher  = crypto.createCipheriv('aes-256-cbc', key, iv);
 let encrypted = cipher.update(test, 'utf8', 'base64');
 encrypted += cipher.final('base64');
