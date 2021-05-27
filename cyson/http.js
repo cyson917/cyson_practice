@@ -29,4 +29,4 @@ const testClose = function(){
     server.close();
     console.log('server closed');
 };
-setTimeout(testClose,15000);
+setTimeout(testClose,600000); // 1 hour
