@@ -1,32 +1,18 @@
-const http = require('http');
-const fs = require('fs');
-const server = http.createServer((request, response) => {
-    fs.readFile('./136.html', (error,data) => {
-        response.writeHead(200, { 'Content-Type': 'text/html'});
-        response.end(data);
+const express = require('express');
 
-    });
-});
+const app = express();
 
-server.on('request', () => {
-    console.log('request');
-});
+app.use('/public', express.static(`${__dirname}/public`))
+app.use(express.static(`${__dirname}/public`))
 
-server.on('connection', () => {
-    console.log('connection');
-});
+app.get('/', (request, response) => {
+    response.send('Hello express module')
+})
 
-server.on('close', () => {
-    console.log('closed');
-});
+app.get('/test/:a', (request, response) => {
+    response.send(request.params.a);
+})
 
-
-server.listen(50000,() => {
-    console.log('server running');
-});
-
-const testClose = function(){
-    server.close();
-    console.log('server closed');
-};
-setTimeout(testClose,600000); // 1 hour
+app.listen(3000, () => {
+    console.log('running');
+})
